@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="color3">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+   
+   <form  [formGroup] = "myForm" (ngSubmit)="submitData(myForm)">
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item no-lines *ngIf="( myForm.get('name').hasError('minlength') || myForm.get('name').hasError('required') ) && myForm.get('name').touched">
+
+      <div class="error" *ngIf="myForm.get('name').hasError('required') && myForm.get('name').touched">
+      Name is required
+      </div>
+      <div class="error" *ngIf="myForm.get('name').hasError('minlength') && myForm.get('name').touched">
+      Minimum of 4 characters
+      </div>
+      </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    
+    <ion-item no-lines *ngIf="( myForm.get('password').hasError('minlength') || myForm.get('password').hasError('required') ) && myForm.get('password').touched">
+      <div class="error" *ngIf="myForm.get('password').hasError('required') && myForm.get('password').touched">
+      Password is required
+      </div>
+      <div class="error" *ngIf="myForm.get('password').hasError('minlength') && myForm.get('password').touched">
+      Minimum of 4 characters
+      </div>
+      </ion-item>
+    <div padding>
+  <button type="submit" block primary ion-button [disabled]="!(myForm.get('name').valid && myForm.get('password').valid)">Submit</button>
+</div>
+  </form>
+  <input type="number" [(ngModel)]="card" (keypress) = "update()">
+</ion-content>
